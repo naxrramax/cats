@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cats & Lana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./icon_5d4df0e35194f9709892bd93f80f70eb.ico" type="image/x-icon">
+  <style>
+    @font-face {
+      font-family: 'MiFuente';
+      src: url('./BlackDread-Regular.otf');
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Cinzel Decorative', serif;
+      background: linear-gradient(to bottom, #1c1c1c, #000);
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 2rem;
+      overflow-x: hidden;
+      transition: background 1s, color 1s;
+    }
+
+    nav {
+      width: 100%;
+      background-color: rgba(33, 33, 33, 0.9);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+    }
+
+    nav a,
+    nav button {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-size: 1rem;
+      background: transparent;
+      border: 1px solid #ff66cc;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    nav a:hover,
+    nav button:hover {
+      background: #ff66cc;
+      color: #000;
+    }
+
+    header {
+      text-align: center;
+      margin: 2rem 1rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-shadow: 0 0 5px #f0f, 0 0 10px #0ff;
+    }
+
+    .ornamental {
+      width: 90%;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #444;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      font-family: monospace;
+      color: #ddd;
+      text-shadow: 0 0 3px #000;
+      font-size: 0.9rem;
+    }
+
+    pre span {
+      color: #0ff;
+    }
+
+    .dark-mode {
+      background: #000 !important;
+      color: #f0f0f0 !important;
+    }
+
+    .dark-mode .ornamental {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: #999;
+    }
+
+    .galeria {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .galeria img {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 0 10px #fff3;
+      transition: transform 0.3s;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.1);
+    }
+
+    .corazon {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: flotar 2s linear forwards;
+      border-radius: 5px;
+      z-index: 999;
+    }
+
+    .corazon::before,
+    .corazon::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .corazon::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .corazon::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes flotar {
+      to {
+        transform: translateY(-200px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button onclick="mostrarGatos()">cats</button>
+    <button onclick="activarModoGotico()">music</button>
+    <button onclick="lluviaEstrellas()">stars</button>
+    <button onclick="modoMartes()">martes</button>
+
+
+  </nav>
+
+  <header>
+    <h1>silly cats and Lana del Rey</h1>
+  </header>
+
+  <div class="galeria" id="galeriaGatos">
+    <img src="./artworks-Tv8GPoDybgPxybY7-3EE3jQ-t500x500.jpg" alt="Gato 1" />
+    <img src="./CuhBG.webp" alt="Gato 2" />
+    <img src="./images (1).jpg" alt="Gato 3" />
+    <img src="./IMG_9410-900x1200.jpg" alt="Gato 4" />
+  </div>
+
+  <div class="ornamental">
+    <pre>
+ ,_     _ 
+ |\\_,-~/ 
+        / _  _ |    ,--. 
+        (  @  @ )   / ,-'
+        \  _T_/-._( (
+        /         `. \
+        |         _  \ |
+        \ \ ,  /      |
+        || |-_\__   / 
+        ((_/`(____,-'
+                                @_.naxrxx._
+    </pre>
+  </div>
+
+  <audio id="lanaAudio" src="./videoplayback.m4a" preload="auto"></audio>
+
+  <script>
+    let modoActivo = false;
+
+    function activarModoGotico() {
+      document.body.classList.toggle('dark-mode');
+
+      const audio = document.getElementById('lanaAudio');
+      if (!modoActivo) {
+        audio.play();
+        modoActivo = true;
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+        modoActivo = false;
+      }
+    }
+
+    function mostrarGatos() {
+      const galeria = document.getElementById("galeriaGatos");
+      galeria.style.display = galeria.style.display === "flex" ? "none" : "flex";
+    }
+
+    function lluviaEstrellas() {
+  for (let i = 0; i < 15; i++) {
+    const estrella = document.createElement("div");
+    estrella.textContent = "✨";
+    estrella.style.position = "fixed";
+    estrella.style.left = Math.random() * window.innerWidth + "px";
+    estrella.style.bottom = "0px";
+    estrella.style.fontSize = "24px";
+    estrella.style.animation = "flotar 2s linear forwards";
+    estrella.style.zIndex = 999;
+    document.body.appendChild(estrella);
+    setTimeout(() => estrella.remove(), 2000);
+  }
+}
+function modoMartes() {
+    // Oculta todo
+    document.body.innerHTML = '';
+
+    // Crea un emoji gigante de dinosaurio
+    const dino = document.createElement('div');
+    dino.textContent = '🦖';
+    dino.style.fontSize = '100px';
+    dino.style.position = 'fixed';
+    dino.style.top = '50%';
+    dino.style.left = '50%';
+    dino.style.transform = 'translate(-50%, -50%)';
+    dino.style.zIndex = 999;
+    dino.style.animation = 'zoom 2s infinite alternate';
+    document.body.appendChild(dino);
+}
+
+  </script>
+</body>
+</html>
